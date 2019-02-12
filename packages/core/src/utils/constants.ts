@@ -11,3 +11,7 @@ export const MIN_COLUMN_WIDTH = 320
 
 export const API_BASE_URL = 'https://api.devhubapp.com'
 export const GRAPHQL_ENDPOINT = `${API_BASE_URL}/graphql`
+
+export const GITHUB_APP_CANNONICAL_ID = __DEV__
+  ? 'devhub-localhost-app'
+  : 'devhub-app'
