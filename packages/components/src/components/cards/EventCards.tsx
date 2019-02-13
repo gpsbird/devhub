@@ -1,7 +1,12 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { Column, constants, EnhancedGitHubEvent, LoadState } from '@devhub/core'
+import {
+  Column,
+  constants,
+  EnhancedGitHubEvent,
+  EnhancedLoadState,
+} from '@devhub/core'
 import { useReduxAction } from '../../hooks/use-redux-action'
 import { ErrorBoundary } from '../../libs/bugsnag'
 import * as actions from '../../redux/actions'
@@ -19,7 +24,7 @@ export interface EventCardsProps {
   errorMessage: EmptyCardsProps['errorMessage']
   events: EnhancedGitHubEvent[]
   fetchNextPage: (() => void) | undefined
-  loadState: LoadState
+  loadState: EnhancedLoadState
   refresh: EmptyCardsProps['refresh']
   repoIsKnown?: boolean
   swipeable?: boolean

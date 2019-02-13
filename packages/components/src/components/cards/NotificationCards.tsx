@@ -5,7 +5,7 @@ import {
   Column,
   constants,
   EnhancedGitHubNotification,
-  LoadState,
+  EnhancedLoadState,
 } from '@devhub/core'
 import { useReduxAction } from '../../hooks/use-redux-action'
 import { ErrorBoundary } from '../../libs/bugsnag'
@@ -23,7 +23,7 @@ export interface NotificationCardsProps {
   columnIndex: number
   errorMessage: EmptyCardsProps['errorMessage']
   fetchNextPage: (() => void) | undefined
-  loadState: LoadState
+  loadState: EnhancedLoadState
   notifications: EnhancedGitHubNotification[]
   refresh: EmptyCardsProps['refresh']
   repoIsKnown?: boolean

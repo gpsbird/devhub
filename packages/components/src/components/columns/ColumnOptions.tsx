@@ -5,9 +5,7 @@ import { ScrollView, View } from 'react-native'
 import { Column, eventTypes, getEventTypeMetadata } from '@devhub/core'
 import { useCSSVariablesOrSpringAnimatedTheme } from '../../hooks/use-css-variables-or-spring--animated-theme'
 import { useReduxAction } from '../../hooks/use-redux-action'
-import { useReduxState } from '../../hooks/use-redux-state'
 import * as actions from '../../redux/actions'
-import * as selectors from '../../redux/selectors'
 import { columnHeaderHeight, contentPadding } from '../../styles/variables'
 import {
   filterRecordHasAnyForcedValue,
@@ -48,7 +46,7 @@ export type ColumnOptionCategory =
 
 export const ColumnOptions = React.memo((props: ColumnOptionsProps) => {
   const { availableHeight, column, columnIndex } = props
-  const { startWithFiltersExpanded = availableHeight >= 700 } = props
+  const { startWithFiltersExpanded = availableHeight >= 800 } = props
 
   const _allColumnOptionCategories: Array<ColumnOptionCategory | false> = [
     column.type === 'activity' && 'event_types',
@@ -75,10 +73,6 @@ export const ColumnOptions = React.memo((props: ColumnOptionsProps) => {
   const allowToggleCategoriesRef = useRef(true)
 
   const springAnimatedTheme = useCSSVariablesOrSpringAnimatedTheme()
-
-  const hasPrivateAccess = useReduxState(
-    selectors.githubHasPrivateAccessSelector,
-  )
 
   const deleteColumn = useReduxAction(actions.deleteColumn)
   const moveColumn = useReduxAction(actions.moveColumn)
@@ -355,19 +349,13 @@ export const ColumnOptions = React.memo((props: ColumnOptionsProps) => {
         })()}
 
         {(() => {
-          const isPrivateChecked =
-            column.type === 'notifications'
-              ? column.filters && column.filters.private === true
-              : hasPrivateAccess &&
-                !(column.filters && column.filters.private === false)
+          const isPrivateChecked = !(
+            column.filters && column.filters.private === false
+          )
 
           const isPublicChecked = !(
             column.filters && column.filters.private === true
           )
-
-          const canShowPrivateContent = hasPrivateAccess // || column.type === 'notifications'
-
-          if (!canShowPrivateContent && !isPrivateChecked) return null
 
           const getFilterValue = (
             showPublic?: boolean,
@@ -409,10 +397,7 @@ export const ColumnOptions = React.memo((props: ColumnOptionsProps) => {
                 analyticsLabel="public"
                 checked={isPublicChecked}
                 containerStyle={{ flexGrow: 1 }}
-                disabled={
-                  isPublicChecked &&
-                  (!isPrivateChecked || !canShowPrivateContent)
-                }
+                disabled={isPublicChecked && !isPrivateChecked}
                 label="Public"
                 // labelIcon="globe"
                 onChange={checked => {
@@ -429,10 +414,7 @@ export const ColumnOptions = React.memo((props: ColumnOptionsProps) => {
                 analyticsLabel="private"
                 checked={isPrivateChecked}
                 containerStyle={{ flexGrow: 1 }}
-                disabled={
-                  (isPrivateChecked && !isPublicChecked) ||
-                  (!isPrivateChecked && !canShowPrivateContent)
-                }
+                disabled={isPrivateChecked && !isPublicChecked}
                 label="Private"
                 // labelIcon="lock"
                 onChange={checked => {

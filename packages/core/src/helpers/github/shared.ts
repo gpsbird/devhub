@@ -5,7 +5,7 @@ import {
   ColumnSubscription,
   EnhancedGitHubEvent,
   EnhancedGitHubNotification,
-  GitHubApiHeaders,
+  GitHubAPIHeaders,
   GitHubIcon,
   GitHubPullRequest,
 } from '../../types'
@@ -225,8 +225,8 @@ export function createSubscriptionObjectsWithId(
   }))
 }
 
-export function getGitHubApiHeadersFromHeader(headers: Record<string, any>) {
-  const github: GitHubApiHeaders = {}
+export function getGitHubAPIHeadersFromHeader(headers: Record<string, any>) {
+  const github: GitHubAPIHeaders = {}
 
   if (!headers) return github
 
