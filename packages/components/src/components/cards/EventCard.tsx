@@ -151,7 +151,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
     ? getGitHubAvatarURLFromPayload(payload, actor.id)
     : undefined
 
-  const avatarURL = (isBot && botAvatarURL) || actor.avatar_url
+  const avatarUrl = (isBot && botAvatarURL) || actor.avatar_url
 
   const { icon: pullRequestIconName, color: pullRequestIconColor } = pullRequest
     ? getPullRequestIconAndColor(pullRequest)
@@ -190,7 +190,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
       <EventCardHeader
         key={`event-card-header-${id}`}
         actionText={actionText}
-        avatarURL={avatarURL}
+        avatarUrl={avatarUrl}
         cardIconColor={cardIconColor}
         cardIconName={cardIconName}
         date={event.created_at}
@@ -263,7 +263,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
       {Boolean(pullRequest) && (
         <IssueOrPullRequestRow
           key={`event-pr-row-${pullRequest.id}`}
-          avatarURL={pullRequest.user.avatar_url}
+          avatarUrl={pullRequest.user.avatar_url}
           commentsCount={pullRequest.comments}
           createdAt={pullRequest.created_at}
           iconColor={pullRequestIconColor!}
@@ -294,7 +294,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
       {Boolean(issue) && (
         <IssueOrPullRequestRow
           key={`event-issue-row-${issue.id}`}
-          avatarURL={issue.user.avatar_url}
+          avatarUrl={issue.user.avatar_url}
           commentsCount={issue.comments}
           createdAt={issue.created_at}
           iconColor={issueIconColor!}
@@ -318,7 +318,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
         Boolean(issue.body) && (
           <CommentRow
             key={`event-issue-body-row-${issue.id}`}
-            avatarURL={issue.user.avatar_url}
+            avatarUrl={issue.user.avatar_url}
             body={issue.body}
             isRead={isRead}
             smallLeftColumn={smallLeftColumn}
@@ -332,7 +332,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
           Boolean(pullRequest.body) && (
             <CommentRow
               key={`event-pr-body-row-${pullRequest.id}`}
-              avatarURL={pullRequest.user.avatar_url}
+              avatarUrl={pullRequest.user.avatar_url}
               body={pullRequest.body}
               isRead={isRead}
               smallLeftColumn={smallLeftColumn}
@@ -346,7 +346,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
         (Boolean(comment && comment.body) && (
           <CommentRow
             key={`event-comment-row-${comment.id}`}
-            avatarURL={comment.user.avatar_url}
+            avatarUrl={comment.user.avatar_url}
             body={comment.body}
             isRead={isRead}
             smallLeftColumn={smallLeftColumn}
@@ -359,7 +359,7 @@ export const EventCard = React.memo((props: EventCardProps) => {
       {Boolean(release) && (
         <ReleaseRow
           key={`event-release-row-${release.id}`}
-          avatarURL={release.author.avatar_url}
+          avatarUrl={release.author.avatar_url}
           body={release.body}
           branch={release.target_commitish}
           isRead={isRead}

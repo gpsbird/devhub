@@ -32,7 +32,7 @@ import { cardStyles, getCardStylesForTheme } from '../styles'
 
 export interface NotificationCardHeaderProps {
   actionText: string
-  avatarURL: string
+  avatarUrl: string
   cardIconColor?: string
   cardIconName: GitHubIcon
   date: MomentInput
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 export function NotificationCardHeader(props: NotificationCardHeaderProps) {
   const {
     actionText,
-    avatarURL,
+    avatarUrl,
     cardIconColor,
     cardIconName,
     date,
@@ -111,7 +111,7 @@ export function NotificationCardHeader(props: NotificationCardHeaderProps) {
         ]}
       >
         <Avatar
-          avatarURL={avatarURL}
+          avatarUrl={avatarUrl}
           isBot={isBot}
           linkURL={userLinkURL}
           shape={isBot ? undefined : 'circle'}
